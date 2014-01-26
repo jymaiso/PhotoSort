@@ -45,6 +45,11 @@ namespace PhotoSort
             GC.Collect();
             GC.WaitForPendingFinalizers();
 
+            if (this.Photos.Count == 0)
+            {
+                return;
+            }
+
             if (index < 0 || index > this.Photos.Count)
             {
                 this.Image.Source = null;
@@ -53,6 +58,7 @@ namespace PhotoSort
             }
             else
             {
+
                 this.Image.Source = this.Photos[index].Image;
                 this.chkPrinted.IsChecked = this.Photos[index].Print;
                 if (this.Photos[index].Print)
