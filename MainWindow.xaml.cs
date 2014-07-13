@@ -25,7 +25,7 @@ namespace PhotoSort
         public MainWindow()
         {
             InitializeComponent();
-            this.ImagesDir.Text = @"D:\Photo\Yas&Jym\Lina";
+            this.ImagesDir.Text = @"D:\Photo\Yas&Jym\Lina\20140601";
         }
 
         private void OnImagesDirChangeClick(object sender, RoutedEventArgs e)
@@ -78,6 +78,16 @@ namespace PhotoSort
             DisplayImageAtIndex(index);
         }
 
+        private void ActionNext10(object sender, RoutedEventArgs e)
+        {
+            index += 10;
+
+            if (index >= this.Photos.Count)
+                index = 0;
+
+            DisplayImageAtIndex(index);
+        }
+
         private void ActionPrevious(object sender, RoutedEventArgs e)
         {
             index--;
@@ -88,11 +98,26 @@ namespace PhotoSort
             DisplayImageAtIndex(index);
         }
 
+        private void ActionPrevious10(object sender, RoutedEventArgs e)
+        {
+            index -= 10;
+
+            if (index < 0)
+                index = this.Photos.Count - 1;
+
+            DisplayImageAtIndex(index);
+        }
+
         private void ActionDelete(object sender, RoutedEventArgs e)
         {
+            var indexTemp = index;
+
+            if (index + 1 >= this.Photos.Count)
+                index = 0;
+
             DisplayImageAtIndex(index + 1);
 
-            this.Photos.Delete(index);
+            this.Photos.Delete(indexTemp);
         }
 
         private void ActionPrint(object sender, RoutedEventArgs e)
